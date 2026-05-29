@@ -31,9 +31,6 @@
 
     <h2>Digite o caminho de um repositório para renderizar</h2>
 
-    <h2 style="color: blue !important;">
-        Itens na lista: <span th:text="${repositorios != null ? repositorios.size() : 'Lista Nula'}">0</span>
-    </h2>
     <div id="viewport" style="display: flex; flex-direction: column; align-items: center; width: 100%;">
 
         <div th:each="r : ${repositorios}"

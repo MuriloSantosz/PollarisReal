@@ -17,12 +17,10 @@ public class EstudanteController {
                 RestTemplate restTemplate = new RestTemplate();
                 String url = "https://api.github.com/search/repositories?q=" + busca;
 
-                // O GitHub EXIGE um User-Agent para não bloquear a requisição
                 org.springframework.http.HttpHeaders headers = new org.springframework.http.HttpHeaders();
                 headers.set("User-Agent", "Java-Spring-App");
                 org.springframework.http.HttpEntity<String> entity = new org.springframework.http.HttpEntity<>(headers);
 
-                // Fazemos a chamada usando exchange para poder passar os headers
                 org.springframework.http.ResponseEntity<Map> responseEntity = restTemplate.exchange(
                         url,
                         org.springframework.http.HttpMethod.GET,
