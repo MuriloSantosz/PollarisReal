@@ -1,6 +1,6 @@
 package com.senai.Pollaris.model;
 
-import jakarta.persistence.Entity;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -9,16 +9,25 @@ import lombok.Setter;
 @Setter
 
 public class Usuario {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id_usuario;
+
     private String nome;
+    @Column(unique = true, nullable = false)
     private String email;
+    @Column(nullable = false)
     private String senha;
-    private TipoUsuario usuario;
+
+    @Enumerated(EnumType.STRING)
+    private TipoUsuario tipoUsuario;
 
     public Usuario(String nome, String email, String senha, TipoUsuario usuario) {
         this.nome = nome;
         this.email = email;
         this.senha = senha;
-        this.usuario = usuario;
+        this.tipoUsuario = tipoUsuario;
     }
     public Usuario(){}
 

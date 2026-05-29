@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estudantes</title>
+    <link rel="stylesheet" th:href="@{/style.css}">
+    <script>
+        let tempoEspera;
+        function pesquisaAutomatica(){
+            clearTimeout(tempoEspera);
+            tempoEspera = setTimeout(()=>{
+                document.getElementById('form-busca').submit();
+            }, 700)
+        }
+    </script>
+</head>
+<body>
+<main id="tela-principal">
+
+    <header id="cabecalho">
+        <img src="imagens/logu.jpeg" alt="Urso Pollaris">
+        <h1>Pollaris</h1>
+    </header>
+
+    <form th:action="@{/estudante}" method="GET" id="form-busca">
+        <input type="text" name="busca" id="pesquisa" placeholder="Pesquise a url" oninput="pesquisaAutomatica()">
+
+            <img src="imagens/Lupa.png" alt="Pesquisar">
+    </form>
+
+    <h2>Digite o caminho de um repositório para renderizar</h2>
+
+    <h2 style="color: blue !important;">
+        Itens na lista: <span th:text="${repositorios != null ? repositorios.size() : 'Lista Nula'}">0</span>
+    </h2>
+    <div id="viewport" style="display: flex; flex-direction: column; align-items: center; width: 100%;">
+
+        <div th:each="r : ${repositorios}"
+             style="background-color: #f8f9fa; border: 1px solid #ddd; border-radius: 8px; padding: 20px; margin: 10px; width: 80%; max-width: 600px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); text-align: left;">
+
+            <h3 th:text="${r['full_name']}" style="color: #007bff; margin-top: 0;">Nome do Repositório</h3>
+
+            <p th:text="${r['description']}" style="color: #333; font-size: 14px; margin: 10px 0;">Sem descrição disponível.</p>
+
+            <a th:href="${r['html_url']}" target="_blank"
+               style="color: white; background-color: #28a745; padding: 8px 15px; border-radius: 5px; text-decoration: none; font-weight: bold; display: inline-block;">
+                Abrir no GitHub
+            </a>
+        </div>
+    </div>
+</main>
+
+<footer id="status">Status: Pronto para navegar</footer>
+
+</body>
+</html>

@@ -1,0 +1,160 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: rgb(255, 255, 255);
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    overflow: hidden;
+}
+
+main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.6s ease-in-out;
+    padding: 20px;
+}
+
+main.modo-pesquisa {
+    justify-content: flex-start;
+    padding-top: 20px;
+}
+
+#cabecalho {
+    text-align: center;
+    transition: all 0.5s ease;
+}
+
+#cabecalho img {
+    width: 120px;
+    border-radius: 50%;
+    transition: all 0.5s ease;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+h1 {
+    font-size: 55px;
+    margin: 10px 0 25px 0;
+    color: #333;
+    transition: all 0.3s ease;
+}
+
+h2 {
+    color: #666;
+    font-size: 19px;
+    transition: all 0.3s ease;
+    margin-top: 25px;
+}
+
+main.modo-pesquisa h1,
+main.modo-pesquisa h2 {
+    opacity: 0;
+    height: 0;
+    margin: 0;
+    overflow: hidden;
+}
+
+main.modo-pesquisa #cabecalho img {
+    width: 60px;
+    margin-bottom: 15px;
+}
+
+#form-busca {
+    display: flex;
+    align-items: center;
+    background-color: #1e2124;
+    border: 2px solid #333;
+    border-radius: 30px;
+    padding: 10px 25px;
+    width: 80%;
+    max-width: 700px;
+    transition: background-color 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+#form-busca:hover,
+#form-busca:focus-within {
+    background-color: #2c4263;
+    border-color: #436993;
+    box-shadow: 0 0 25px rgba(67, 105, 147, 0.6);
+}
+
+input {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    outline: none;
+    font-size: 17px;
+    background-color: transparent;
+    color: #e8eaed;
+    letter-spacing: 0.5px;
+}
+
+input::placeholder {
+    color: #9aa0a6;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    -webkit-text-fill-color: #e8eaed !important;
+    transition: background-color 5000s ease-in-out 0s;
+    background-color: transparent !important;
+}
+
+#search-wrapper button {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: background-color 0.3s ease;
+}
+
+#search-wrapper button:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+}
+
+#search-wrapper button img {
+    width: 28px;
+    height: 28px;
+    opacity: 0.8;
+    transition: opacity 0.3s ease;
+}
+
+#search-wrapper:hover button img,
+#search-wrapper:focus-within button img {
+    opacity: 1;
+}
+
+#viewport {
+    width: 100%;
+    max-width: 800px;
+    flex: 1;
+    overflow-y: auto;
+    transition: opacity 0.5s ease 0.4s;
+}
+
+main.modo-pesquisa #viewport {
+    opacity: 1;
+    margin-top: 15px;
+}
+
+#status {
+    padding: 10px 15px;
+    font-size: 12px;
+    background: #111;
+    color: #ccc;
+    text-align: center;
+}

@@ -1,6 +1,5 @@
 package com.senai.Pollaris.controller;
 
-import com.senai.Pollaris.model.TipoUsuario;
 import com.senai.Pollaris.model.Usuario;
 import com.senai.Pollaris.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,31 +10,29 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-public class UsuarioController {
+public class LoginController {
 
     @Autowired
     private UsuarioRepository usuarioRepository;
 
-    @GetMapping("/cadastro")
-    public String mostrarEcraDeCadastro() {
-        return "cadastro";
+    @GetMapping("/login")
+    public String mostrarLogin() {
+        return "login";
     }
 
-    @PostMapping("/cadastro")
-    public String registarUsuario(
-            @RequestParam("nome") String nome,
+    @PostMapping("/login")
+    public String processarLogin(
             @RequestParam("email") String email,
             @RequestParam("senha") String senha,
-            @RequestParam("tipoUsuario") TipoUsuario tipoUsuario,
             Model model) {
 
-        if (usuarioRepository.findByEmail(email) != null) {
-            model.addAttribute("erro", "Este e-mail já está registado!");
-            return "cadastro";
-        }
+        Usuario usuarioEncontrado = usuarioRepository.findByEmail(email);
 
-        Usuario novoUsuario = new Usuario(nome, email, senha, tipoUsuario);
-        usuarioRepository.save(novoUsuario);
-        return "redirect:/login";
+        if (usuarioEncontrado != null && usuarioEncontrado.getSenha().equals(senha)) {
+            return "redirect:/modo";
+        } else {
+            model.addAttribute("erro", "E-mail ou senha incorretos. Tente novamente.");
+            return "login";
+        }
     }
 }

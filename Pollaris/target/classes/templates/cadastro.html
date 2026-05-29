@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro</title>
+</head>
+<body>
+<div id="container">
+    <h2>Cadastro do usuário</h2>
+
+    <p th:if="${erro}" th:text="${erro}" style="color: #ffcccc; font-weight: 700; text-align: center; margin: 0;"></p>
+
+    <form th:action="@{/cadastro}" method="POST" style="width: 100%; display: flex; flex-direction: column; gap: 24px; align-items: center;">
+
+        <input type="text" id="nome" name="nome" placeholder="Digite seu nome completo..." required>
+        <input type="email" id="email" name="email" placeholder="Digite seu email..." required>
+
+        <div class="campo-senha-container">
+            <input type="password" id="senha" name="senha" placeholder="Crie uma senha forte..." required>
+            <span class="btn-olho" onclick="alternarSenha('senha', this)">👁️</span>
+        </div>
+
+        <select name="tipoUsuario" required>
+            <option value="" disabled selected>Selecione seu perfil...</option>
+            <option value="ESTUDANTE">Estudante</option>
+            <option value="PROFESSOR">Professor</option>
+            <option value="ADMIN">Administrador</option>
+        </select>
+
+        <button type="submit" class="btn-enviar" id="btn-cadastrar">Cadastrar</button>
+    </form>
+
+    <a th:href="@{/login}" class="link-login">Já tem uma conta? Faça login</a>
+</div>
+
+</body>
+</html>
+
+<style>
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-size: cover;
+        margin: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+    }
+
+    #container {
+        background: rgba(53, 85, 126, 0.75);
+        backdrop-filter: blur(15px) saturate(120%);
+        -webkit-backdrop-filter: blur(15px) saturate(120%);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 24px;
+        width: 440px;
+        padding: 50px 40px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 24px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    }
+
+    h2 {
+        color: #ffffff;
+        font-size: 32px;
+        font-weight: 800;
+        margin: 0 0 10px 0;
+        text-align: center;
+        letter-spacing: -0.5px;
+    }
+
+    input {
+        width: 100%;
+        height: 60px;
+        background-color: #2b2b2b;
+        border: none;
+        border-radius: 16px;
+        padding: 0 20px;
+        color: #ffffff;
+        font-size: 18px;
+        font-weight: 700;
+        outline: none;
+        transition: background-color 0.2s ease;
+    }
+
+    input::placeholder {
+        color: #757575;
+        font-weight: 700;
+    }
+
+    input:focus {
+        background-color: #333333;
+    }
+
+    .campo-senha-container {
+        position: relative;
+        width: 100%;
+    }
+
+    .campo-senha-container input {
+        padding-right: 60px;
+    }
+
+    .btn-olho {
+        position: absolute;
+        right: 20px;
+        top: 50%;
+        transform: translateY(-50%);
+        cursor: pointer;
+        font-size: 20px;
+        user-select: none;
+    }
+
+    .btn-enviar {
+        width: 100%;
+        height: 48px;
+        background-color: #e8f0fe;
+        color: #1a2a40;
+        border: none;
+        border-radius: 12px;
+        font-size: 20px;
+        font-weight: 800;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 10px;
+        transition: all 0.2s ease;
+        cursor: pointer;
+    }
+
+    .btn-enviar:hover {
+        background-color: #ffffff;
+        transform: scale(1.02);
+    }
+
+    .btn-enviar:active {
+        transform: scale(0.98);
+        background-color: #d0e0fc;
+    }
+
+    .link-login {
+        color: #ffffff;
+        font-size: 14px;
+        font-weight: 600;
+        text-decoration: none;
+        opacity: 0.8;
+        transition: opacity 0.2s ease, text-decoration 0.2s ease;
+        margin-top: 5px;
+    }
+
+    .link-login:hover {
+        opacity: 1;
+        text-decoration: underline;
+    }
+</style>
